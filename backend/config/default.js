@@ -18,5 +18,8 @@ module.exports = {
   jwt: {
     expiresIn: "1h",
     jwtSecret: "vtDnSsRVrai"
+  },
+  general: {
+    ipDnsServer: "10.10.0.1"
   }
 };

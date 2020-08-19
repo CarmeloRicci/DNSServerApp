@@ -58,4 +58,22 @@ export default class DNSService {
             console.log("ERROR", error);
         }
     }
+
+    // ----- Risponde alla richiesta comunicando il dns ai gateway ----- \\
+
+    async SendPostResponse(ip: string) {
+        let request_data = {
+            url: `http://${ip}:3800/dns_response`,
+            method: 'POST',
+            body: {
+                params: {
+                    dns: cfg.general.ipDnsServer
+                }
+            },
+            json: true
+        };
+        await Utilities.request(request_data);
+        console.log("DnsService - SendPostResponse: Post send! " + `(http://${ip}:3800/dns_response)`)
+    }
+
 }
