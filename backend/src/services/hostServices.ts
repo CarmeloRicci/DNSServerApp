@@ -24,28 +24,30 @@ export default class DnsService {
     
     const preserveFormatting = true
 
-    let temp = new Array();
+    let hosts: IHostDevice[]
+    let temp:IHostDevice
     await hostile.get(preserveFormatting, function (err: any, lines: any) {
       if (err) {
         console.error(err.message)
       }
       lines.forEach(function (line: any) {
         //console.log(line[0], line[1]) // [IP, Host]
-        temp.push ( new Object ( { ip: line[0], host: line[1] }) )
+        temp= {ip: line[0], host: line[1] ,mac: ""}
       })
     })
-      console.log("okok2", temp)
-    for (let i = 0; i < temp.length; i++) {
-          console.log(i + " -> " + temp[i])
-          if (device.ip == temp[i][0]) {
-            if (device.host != temp[i][1]) {
-              await this.UpdateRecordHostsFile(device, temp[i][1])
-            }
-          } else {
-            await this.InsertRecordHostsFile(device)
-          }
+    console.log("okok2", temp)
+    
+    // for (let i = 0; i < temp.length; i++) {
+    //       console.log(i + " -> " + temp[i])
+    //       if (device.ip == temp[i][0]) {
+    //         if (device.host != temp[i][1]) {
+    //           await this.UpdateRecordHostsFile(device, temp[i][1])
+    //         }
+    //       } else {
+    //         await this.InsertRecordHostsFile(device)
+    //       }
 
-        }
+    //     }
       }
 
 
