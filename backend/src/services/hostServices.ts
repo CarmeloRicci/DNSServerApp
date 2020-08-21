@@ -48,9 +48,9 @@ export default class DnsService {
 
   async FindIpInToHostsFile(device: IHostDevice) {
 
-    let temp: IHostDevice[] = new Array();this.GetHostsFile
+    const temp:any = await this.GetHostsFile()
 
-    console.log("okok2", temp.length)
+    console.log("okok2", temp.length )
 
     for (let i = 0; i < temp.length; i++) {
           console.log(i + " -> " + temp[i])
