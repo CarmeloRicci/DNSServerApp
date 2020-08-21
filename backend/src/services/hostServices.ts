@@ -9,6 +9,7 @@ var hostile = require('hostile')
 export default class DnsService {
 
     async NewRulesForHostFile (data: any) {
+      console.log(data)
         var preserveFormatting = true
  
         await hostile.get(preserveFormatting, function (err: any, lines: any) {
@@ -19,5 +20,7 @@ export default class DnsService {
             console.log(line)
           })
         })
+        console.log(data)
     }
+    
 }
