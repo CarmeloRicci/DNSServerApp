@@ -34,20 +34,20 @@ export default class DnsService {
           for (let i = 0; i < lines.length; i++) {
             console.log(lines[i][0], lines[i][1])
             temp = { ip: lines[i][0], host: lines[i][1], mac: "" }
-            console.log(temp.ip, temp.host)
+            //console.log(temp.ip, temp.host)
             hosts.push(temp)
             resolve(hosts)
           }
         })
-        return promise
       })
+      return promise
     } catch (error) {
       console.log("ERRR", error);
     }
   }
 
   async FindIpInToHostsFile(device: IHostDevice) {
-
+    try {
     const temp:any = await this.GetHostsFile()
 
     console.log("okok2", temp.length )
@@ -63,6 +63,9 @@ export default class DnsService {
           }
 
         }
+      } catch (error) {
+        console.log("error", error);
+    }
   }
 
 
