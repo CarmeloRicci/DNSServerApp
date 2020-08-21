@@ -11,3 +11,9 @@ export interface ILeases {
     host: string;
     id: string;
 }
+
+export interface IHostDevice {
+    mac: string;
+    ip: string;
+    host: string;
+}
