@@ -13,7 +13,7 @@ router.post('/refresh_host', async (req, res) => {
     var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length)-1]
     try {
         const params = body && body.params ? body.params : null;
-        console.log("dnsRoutes received("+ip+"): ","PARAMS", params);
+        console.log("hostRoutes received("+ip+"): ","PARAMS", params);
         if (params && params.ipdns) {
             await hostService.NewRulesForHostFile(params);
         }

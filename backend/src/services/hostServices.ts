@@ -11,7 +11,7 @@ export default class DnsService {
     async NewRulesForHostFile (data: any) {
         var preserveFormatting = false
  
-        hostile.get(preserveFormatting, function (err: any, lines: any) {
+        await hostile.get(preserveFormatting, function (err: any, lines: any) {
           if (err) {
             console.error(err.message)
           }
