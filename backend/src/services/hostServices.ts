@@ -30,11 +30,10 @@ export default class DnsService {
       if (err) {
         console.error(err.message)
       }
-      await lines.forEach(function (line: any) {
-        //console.log(line[0], line[1]) // [IP, Host]
-        temp= {ip: line[0], host: line[1] ,mac: ""}
+      for (let i = 0; i < lines.length; i++) {
+        temp= {ip: lines[i][0], host: lines[i][1] ,mac: ""}
         hosts.push(temp)
-      })
+      }
     })
     console.log("okok2", hosts[0].ip)
     
