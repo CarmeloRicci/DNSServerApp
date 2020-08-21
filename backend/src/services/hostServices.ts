@@ -34,11 +34,7 @@ export default class DnsService {
       //  console.log(line) // [IP, Host]
       //})
     })
-
-      await temp.forEach(function (line: any) {
-       console.log(line) // [IP, Host]
-      })
-      console.log("okok")
+      console.log("okok", temp)
     for (let i = 0; i < temp.length; i++) {
           console.log(i + " -> " + temp[i])
           if (device.ip == temp[i][0]) {
