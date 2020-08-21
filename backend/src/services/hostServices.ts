@@ -22,7 +22,7 @@ export default class DnsService {
 
   async FindIpInToHostsFile(device: IHostDevice) {
     
-    const preserveFormatting = true
+    const preserveFormatting = false
 
     let hosts: IHostDevice[] = new Array();
     let temp:IHostDevice
