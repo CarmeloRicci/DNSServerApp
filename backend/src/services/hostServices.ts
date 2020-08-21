@@ -31,6 +31,7 @@ export default class DnsService {
         console.error(err.message)
       }
       for (let i = 0; i < lines.length; i++) {
+        console.log(lines[i][0], lines[i][1])
         temp= {ip: lines[i][0], host: lines[i][1] ,mac: ""}
         hosts.push(temp)
       }
