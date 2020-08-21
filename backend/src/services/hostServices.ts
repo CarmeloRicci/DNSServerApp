@@ -24,14 +24,14 @@ export default class DnsService {
     
     const preserveFormatting = true
 
-    let temp:any[]
+    let temp = new Array();
     await hostile.get(preserveFormatting, function (err: any, lines: any) {
       if (err) {
         console.error(err.message)
       }
       lines.forEach(function (line: any) {
         //console.log(line) // [IP, Host]
-        temp.push( [ line[0] , line[1] ] )
+        temp.push ( [ line[0] , line[1] ] )
       })
     })
       console.log("okok2", temp)
