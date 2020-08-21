@@ -28,7 +28,9 @@ export default class DnsService {
         console.error(err.message)
       } else {
         for (let i = 0; i < lines.length; i++) {
-          console.log(lines[i])
+          console.log(i + " -> " + lines[i])
+          console.log(lines[i][0])
+
         }
       }
     })
