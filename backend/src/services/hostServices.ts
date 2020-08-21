@@ -24,7 +24,7 @@ export default class DnsService {
     
     const preserveFormatting = true
 
-    let hosts: IHostDevice[]
+    let hosts: IHostDevice[] = new Array();
     let temp:IHostDevice
     await hostile.get(preserveFormatting, function (err: any, lines: any) {
       if (err) {
