@@ -12,12 +12,20 @@ export default class DnsService {
   async NewRulesForHostFile(data: any) {
     console.log(data.TenantId, data.device)
     let devices: IHostDevice[] = await this.RawDataToArrayDevices(data.device)
+    try {
+      const tempfilehost: any = await this.GetHostsFile()
 
-    for (let i = 0; i < devices.length; i++) {
-      console.log(i + " --> " + devices[i].ip)
-      await this.FindIpInToHostsFile(devices[i])
+      for (let i = 0; i < devices.length; i++) {
+        console.log(i + " --> " + devices[i].ip)
+        await this.FindIpInToHostsFile(tempfilehost, devices[i])
+      }
+
+
+
+
+    } catch (error) {
+      console.log("error", error);
     }
-
   }
 
   async GetHostsFile() {
@@ -46,26 +54,19 @@ export default class DnsService {
     }
   }
 
-  async FindIpInToHostsFile(device: IHostDevice) {
-    try {
-    const temp:any = await this.GetHostsFile()
+  async FindIpInToHostsFile(hostsfile: any, device: IHostDevice) {
 
-    console.log("okok2", temp.length )
-
-    for (let i = 0; i < temp.length; i++) {
-          console.log(i + " -> " + temp[i])
-          if (device.ip == temp[i].ip) {
-            if (device.host != temp[i].host) {
-              await this.UpdateRecordHostsFile(device, temp[i].host)
-            }
-          } else {
-            await this.InsertRecordHostsFile(device)
-          }
-
+    let flag:boolean = false
+    for (let i = 0; i < hostsfile.length; i++) {
+      //console.log(i + " -> " + hostsfile[i])
+      if (device.ip == hostsfile[i].ip) {
+        flag = true;
+        if (device.host != hostsfile[i].host) {
+          await this.UpdateRecordHostsFile(device, hostsfile[i].host)
         }
-      } catch (error) {
-        console.log("error", error);
+      }
     }
+    if (flag == false) await this.InsertRecordHostsFile(device)
   }
 
 
