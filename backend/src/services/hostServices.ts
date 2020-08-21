@@ -12,15 +12,13 @@ export default class DnsService {
   async NewRulesForHostFile(data: any) {
     let devices: IHostDevice[] = await this.RawDataToArrayDevices(data.device)
 
-    await this.FindIpInToHostsFile("s");
+    for (let i = 0; i < devices.length; i++) {
+      await this.FindIpInToHostsFile(devices[i])
+    }
 
-    // for (let i = 0; i < devices.length; i++) {
-    //   devices[i]
-
-    // }
   }
 
-    async FindIpInToHostsFile(ip: string) {
+    async FindIpInToHostsFile(device: IHostDevice) {
     var preserveFormatting = false
 
     await hostile.get(preserveFormatting, function (err: any, lines: any) {
@@ -29,7 +27,13 @@ export default class DnsService {
       } else {
         for (let i = 0; i < lines.length; i++) {
           console.log(i + " -> " + lines[i])
-          console.log(lines[i][0])
+          if (device.ip == lines[i][0]) {
+            if (device.host != lines[i][1]){
+              this.UpdateRecordHostsFile(device,lines[i][1])
+            }            
+          }else{
+            this.InsertRecordHostsFile(device)
+          }
 
         }
       }
@@ -40,6 +44,27 @@ export default class DnsService {
   async RawDataToArrayDevices(raw: any) {
     let temp: IHostDevice[] = raw
     return temp
+  }
+
+  async UpdateRecordHostsFile(device: IHostDevice, oldhostname: string){
+    await hostile.remove(device.ip, oldhostname, function (err: any) {
+      if (err) {
+        console.error(err)
+      } else {
+        console.log('set /etc/hosts successfully!')
+      }
+    })
+    await this.InsertRecordHostsFile(device)
+  }
+
+  async InsertRecordHostsFile(device: IHostDevice){
+    await hostile.set(device.ip, device.host, function (err: any) {
+      if (err) {
+        console.error(err)
+      } else {
+        console.log('set /etc/hosts successfully!')
+      }
+    })
   }
 
 }
