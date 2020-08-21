@@ -24,16 +24,15 @@ export default class DnsService {
     
     const preserveFormatting = true
 
-    let temp:any
+    let temp:any[]
     await hostile.get(preserveFormatting, function (err: any, lines: any) {
       if (err) {
         console.error(err.message)
       }
-      temp = lines
-      console.log("okok1", lines)
-      //lines.forEach(function (line: any) {
-      //  console.log(line) // [IP, Host]
-      //})
+      lines.forEach(function (line: any) {
+        //console.log(line) // [IP, Host]
+        temp.push(line)
+      })
     })
       console.log("okok2", temp)
     for (let i = 0; i < temp.length; i++) {
