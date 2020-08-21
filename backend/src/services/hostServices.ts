@@ -12,12 +12,10 @@ export default class DnsService {
   async NewRulesForHostFile(data: any) {
     console.log(data.TenantId,data.device)
     let devices: IHostDevice[] = await this.RawDataToArrayDevices(data.device)
-
     
-
     for (let i = 0; i < devices.length; i++) {
       console.log(i + " --> " +devices[i].ip)
-      //await this.FindIpInToHostsFile(devices[i])
+      await this.FindIpInToHostsFile(devices[i])
     }
 
   }
@@ -36,7 +34,7 @@ export default class DnsService {
       //  console.log(line) // [IP, Host]
       //})
     })
-      temp.forEach(function (line: any) {
+      await temp.forEach(function (line: any) {
        console.log(line) // [IP, Host]
       })
 
