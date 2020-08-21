@@ -28,10 +28,13 @@ export default class DnsService {
         console.error(err.message)
       }
       temp = lines
-      lines.forEach(function (line: any) {
-        console.log(line) // [IP, Host]
-      })
+      //lines.forEach(function (line: any) {
+      //  console.log(line) // [IP, Host]
+      //})
     })
+      temp.forEach(function (line: any) {
+       console.log(line) // [IP, Host]
+      })
 
     for (let i = 0; i < temp.length; i++) {
           console.log(i + " -> " + temp[i])
