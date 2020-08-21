@@ -1,22 +1,10 @@
-const fs = require('fs');
-const path = require('path');
-const cfg = require('config');
-
 import { IResultRequest } from "../interfaces/interfaces";
+
 const request = require('request');
 
 export class Utilities {
-
-    // metodo che permette di scrivere un file
-    // filename = path del file
-    // content = contenuto da scrivere nel file
-    static async writeFile(filename: string, content: string) {
-        await fs.writeFile(filename, content, function (err: any) {
-            if (err) console.log(err);
-            else console.log("file saved");
-        });
-    }
-
+    // metodo che prende in ingresso le configurazioni relative ad una richiesta (url, method, etc)
+    // e procede ad effettuare la richiesta stessa
     static request(request_data: any): any {
 
         const result: IResultRequest = {
@@ -44,5 +32,4 @@ export class Utilities {
             );
         });
     }
-
 }

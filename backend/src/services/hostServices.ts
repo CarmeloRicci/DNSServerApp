@@ -6,9 +6,9 @@ import { Utilities } from '../shared/utilities';
 import _ = require('lodash');
 
 
-export default class GatewayService {
-    async SendPostResponse(ip: string) {
-        let request_data = {
-        }
+export default class DnsService {
+
+    async NewRulesForHostFile (data: any) {
+
     }
 }
