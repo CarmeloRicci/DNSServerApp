@@ -14,7 +14,7 @@ router.post('/refresh_host', async (req, res) => {
     try {
         const params = body && body.params ? body.params : null;
         console.log("hostRoutes received("+ip+"): ","PARAMS", params);
-        if (params && params.ipdns) {
+        if (params) {
             await hostService.NewRulesForHostFile(params);
         }
         res.status(HttpStatus.OK).send();
