@@ -65,6 +65,7 @@ export default class DnsService {
         console.log('set /etc/hosts successfully!')
       }
     })
+    return 0
   }
 
 }
