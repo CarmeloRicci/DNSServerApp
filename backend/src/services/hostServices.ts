@@ -17,7 +17,7 @@ export default class DnsService {
 
     for (let i = 0; i < devices.length; i++) {
       console.log(i + " --> " +devices[i].ip)
-      await this.FindIpInToHostsFile(devices[i])
+      //await this.FindIpInToHostsFile(devices[i])
     }
 
   }
