@@ -10,48 +10,60 @@ import { IHostDevice } from "../interfaces/interfaces";
 export default class DnsService {
 
   async NewRulesForHostFile(data: any) {
-    console.log(data.TenantId,data.device)
+    console.log(data.TenantId, data.device)
     let devices: IHostDevice[] = await this.RawDataToArrayDevices(data.device)
-    
+
     for (let i = 0; i < devices.length; i++) {
-      console.log(i + " --> " +devices[i].ip)
+      console.log(i + " --> " + devices[i].ip)
       await this.FindIpInToHostsFile(devices[i])
     }
 
   }
 
+  async GetHostsFile() {
+    try {
+      const promise: any = new Promise((resolve, reject) => {
+        const preserveFormatting = false
+
+        let hosts: IHostDevice[] = new Array();
+        let temp: IHostDevice
+        hostile.get(preserveFormatting, function (err: any, lines: any) {
+          if (err) {
+            console.error(err.message)
+          }
+          for (let i = 0; i < lines.length; i++) {
+            console.log(lines[i][0], lines[i][1])
+            temp = { ip: lines[i][0], host: lines[i][1], mac: "" }
+            console.log(temp.ip, temp.host)
+            hosts.push(temp)
+            resolve(hosts)
+          }
+        })
+        return promise
+      })
+    } catch (error) {
+      console.log("ERRR", error);
+    }
+  }
+
   async FindIpInToHostsFile(device: IHostDevice) {
-    
-    const preserveFormatting = false
 
-    let hosts: IHostDevice[] = new Array();
-    let temp:IHostDevice
-    await hostile.get(preserveFormatting, async function (err: any, lines: any) {
-      if (err) {
-        console.error(err.message)
-      }
-      for (let i = 0; i < lines.length; i++) {
-        console.log(lines[i][0], lines[i][1])
-        temp= {ip: lines[i][0], host: lines[i][1] ,mac: ""}
-        console.log(temp.ip, temp.host)
-        hosts.push(temp)
-        console.log( hosts.length)
-      }
-    })
-    console.log("okok2", hosts.length)
-    
-    // for (let i = 0; i < temp.length; i++) {
-    //       console.log(i + " -> " + temp[i])
-    //       if (device.ip == temp[i][0]) {
-    //         if (device.host != temp[i][1]) {
-    //           await this.UpdateRecordHostsFile(device, temp[i][1])
-    //         }
-    //       } else {
-    //         await this.InsertRecordHostsFile(device)
-    //       }
+    let temp: IHostDevice[] = new Array();this.GetHostsFile
 
-    //     }
-      }
+    console.log("okok2", temp.length)
+
+    for (let i = 0; i < temp.length; i++) {
+          console.log(i + " -> " + temp[i])
+          if (device.ip == temp[i].ip) {
+            if (device.host != temp[i].host) {
+              await this.UpdateRecordHostsFile(device, temp[i].host)
+            }
+          } else {
+            await this.InsertRecordHostsFile(device)
+          }
+
+        }
+  }
 
 
   async RawDataToArrayDevices(raw: any) {
