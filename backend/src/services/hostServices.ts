@@ -30,11 +30,12 @@ export default class DnsService {
         console.error(err.message)
       }
       temp = lines
+      console.log("okok1", lines)
       //lines.forEach(function (line: any) {
       //  console.log(line) // [IP, Host]
       //})
     })
-      console.log("okok", temp)
+      console.log("okok2", temp)
     for (let i = 0; i < temp.length; i++) {
           console.log(i + " -> " + temp[i])
           if (device.ip == temp[i][0]) {
