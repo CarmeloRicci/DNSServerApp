@@ -21,7 +21,7 @@ export default class DnsService {
 
   async FindIpInToHostsFile(device: IHostDevice) {
     
-    const preserveFormatting = false
+    const preserveFormatting = true
 
     let temp:any
     await hostile.get(preserveFormatting, function (err: any, lines: any) {
