@@ -10,10 +10,10 @@ import { IHostDevice } from "../interfaces/interfaces";
 export default class DnsService {
 
   async NewRulesForHostFile(data: any) {
-
+    console.log(data.TenantId,data.device)
     let devices: IHostDevice[] = await this.RawDataToArrayDevices(data.device)
 
-    console.log(data.device)
+    
 
     for (let i = 0; i < devices.length; i++) {
       console.log(i + " --> " +devices[i].ip)
