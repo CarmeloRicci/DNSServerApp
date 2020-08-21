@@ -35,7 +35,7 @@ export default class DnsService {
         temp= {ip: line[0], host: line[1] ,mac: ""}
       })
     })
-    console.log("okok2", temp)
+    console.log("okok2", temp.ip)
     
     // for (let i = 0; i < temp.length; i++) {
     //       console.log(i + " -> " + temp[i])
