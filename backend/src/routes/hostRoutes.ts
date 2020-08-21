@@ -8,7 +8,7 @@ const delay = require('delay');
 import HostService from '../services/hostServices';
 const hostService = new HostService();
 
-router.post('/dns_request', async (req, res) => {
+router.post('/refresh_host', async (req, res) => {
     const body = req.body;
     var ip = req.connection.remoteAddress.split(":")[((req.connection.remoteAddress.split(":")).length)-1]
     try {
