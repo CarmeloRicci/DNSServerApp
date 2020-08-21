@@ -26,11 +26,11 @@ export default class DnsService {
 
     let hosts: IHostDevice[] = new Array();
     let temp:IHostDevice
-    await hostile.get(preserveFormatting, function (err: any, lines: any) {
+    await hostile.get(preserveFormatting, async function (err: any, lines: any) {
       if (err) {
         console.error(err.message)
       }
-      lines.forEach(function (line: any) {
+      await lines.forEach(function (line: any) {
         //console.log(line[0], line[1]) // [IP, Host]
         temp= {ip: line[0], host: line[1] ,mac: ""}
         hosts.push(temp)
