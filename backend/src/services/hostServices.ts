@@ -13,6 +13,7 @@ export default class DnsService {
     let devices: IHostDevice[] = await this.RawDataToArrayDevices(data.device)
 
     for (let i = 0; i < devices.length; i++) {
+      console.log(i + " --> " +devices[i])
       await this.FindIpInToHostsFile(devices[i])
     }
 
