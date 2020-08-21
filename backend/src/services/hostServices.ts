@@ -31,7 +31,7 @@ export default class DnsService {
       }
       lines.forEach(function (line: any) {
         //console.log(line) // [IP, Host]
-        temp.push(line)
+        temp.push( [ line[0] , line[1] ] )
       })
     })
       console.log("okok2", temp)
