@@ -5,23 +5,34 @@ const fs = require('fs');
 import { Utilities } from '../shared/utilities';
 import _ = require('lodash');
 var hostile = require('hostile')
-import { IHostDevice } from "../interfaces/interfaces";
+import { IHostDevice, ILeases } from "../interfaces/interfaces";
+
+import LeasesService from '../services/leasesServices';
+const leasesService = new LeasesService();
 
 export default class DnsService {
 
   async NewRulesForHostFile(data: any) {
-    console.log(data.TenantId, data.device)
-    let devices: IHostDevice[] = await this.RawDataToArrayDevices(data.device)
+
+    let devices: IHostDevice
+
+
+    let leases_file: ILeases[] = await leasesService.leasesServices(false)
+
+    for (let i = 0; i < leases_file.length; i++) {
+      if (leases_file[i].mac == data.Mac) {
+        devices = { ip: leases_file[i].ip, mac: data.Mac, host: data.HostName }
+      }
+      else {
+        console.log ("Mac non trovato nel file leases")
+        return 0
+      }
+    }
+
     try {
       const tempfilehost: any = await this.GetHostsFile()
 
-      for (let i = 0; i < devices.length; i++) {
-        console.log(i + " --> " + devices[i].ip)
-        await this.FindIpInToHostsFile(tempfilehost, devices[i])
-      }
-
-
-
+      await this.FindIpInToHostsFile(tempfilehost, devices)
 
     } catch (error) {
       console.log("error", error);
@@ -56,7 +67,7 @@ export default class DnsService {
 
   async FindIpInToHostsFile(hostsfile: any, device: IHostDevice) {
 
-    let flag:boolean = false
+    let flag: boolean = false
     for (let i = 0; i < hostsfile.length; i++) {
       //console.log(i + " -> " + hostsfile[i])
       if (device.ip == hostsfile[i].ip) {

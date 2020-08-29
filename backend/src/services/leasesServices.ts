@@ -9,7 +9,7 @@ import { ILeases } from "../interfaces/interfaces";
 
 
 export default class LeasesServices {
-    async leasesServices(ip: string) {
+    async leasesServices(db: boolean) {
         let leases_file: ILeases[] = new Array();
         let temp: ILeases;
         let data = fs.readFileSync('/var/lib/misc/dnsmasq.leases', 'utf8');
@@ -23,7 +23,13 @@ export default class LeasesServices {
             }
         }
         console.log(leases_file)
-        this.SendPostToDb(leases_file)
+        if (db){
+            await this.SendPostToDb(leases_file)
+            return leases_file
+        } else{
+            return leases_file
+        }
+
     }
 
     async SendPostToDb(data:any) {
@@ -32,7 +38,6 @@ export default class LeasesServices {
             method: 'POST',
             body: {
                 params: {
-                    TenantId: cfg.general.tenant_id,
                     leases: data
                 }
             },

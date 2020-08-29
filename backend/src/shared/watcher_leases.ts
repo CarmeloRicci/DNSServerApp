@@ -8,5 +8,5 @@ const leasesService = new LeasesService();
 
 fs.watchFile(cfg.watcher_leases.path_to_watch, (curr: any, prev: any) => {
     console.log(`[${new Date().toLocaleString()}] Watching for file changes on: ${cfg.watcher_leases.path_to_watch}`);
-    leasesService.leasesServices("todo");
+    leasesService.leasesServices(true);
 })
