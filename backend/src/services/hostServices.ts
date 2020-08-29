@@ -35,7 +35,7 @@ export default class DnsService {
       await this.FindIpInToHostsFile(tempfilehost, devices)
 
     } catch (error) {
-      console.log("error", error);
+      console.log("Error HostServices ", error);
     }
   }
 
