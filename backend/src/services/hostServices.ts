@@ -16,7 +16,7 @@ export default class DnsService {
 
     let devices: IHostDevice
 
-    try {
+
     let leases_file: ILeases[] = await leasesService.leasesServices(false)
 
     for (let i = 0; i < leases_file.length; i++) {
@@ -25,17 +25,17 @@ export default class DnsService {
       }
       else {
         console.log ("Mac non trovato nel file leases")
-        return 0
+        return 0;
       }
     }
 
-
+    try {
       const tempfilehost: any = await this.GetHostsFile()
 
       await this.FindIpInToHostsFile(tempfilehost, devices)
 
     } catch (error) {
-      console.log("Error HostServices ", error);
+      console.log("Error HostServices", error);
     }
   }
 
