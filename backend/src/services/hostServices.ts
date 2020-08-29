@@ -16,7 +16,7 @@ export default class DnsService {
 
     let devices: IHostDevice
 
-
+    try {
     let leases_file: ILeases[] = await leasesService.leasesServices(false)
 
     for (let i = 0; i < leases_file.length; i++) {
@@ -29,7 +29,7 @@ export default class DnsService {
       }
     }
 
-    try {
+
       const tempfilehost: any = await this.GetHostsFile()
 
       await this.FindIpInToHostsFile(tempfilehost, devices)
