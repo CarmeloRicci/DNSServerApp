@@ -20,6 +20,7 @@ export default class DnsService {
     let leases_file: ILeases[] = await leasesService.leasesServices(false)
 
     for (let i = 0; i < leases_file.length; i++) {
+      console.log("1 --> " + leases_file[i].mac , " 2 --> " +  data.Mac)
       if (leases_file[i].mac == data.Mac) {
         devices = { ip: leases_file[i].ip, mac: data.Mac, host: data.HostName }
       }
