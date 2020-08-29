@@ -108,10 +108,10 @@ export default class PingService {
                             _.remove(upaddrsToSend, (n: string) => {
                                 return n == ip
                             });
-                            console.log("PING: contatto -->",`http://${ip}:3800/ping`);
+                            console.log("PING: contatto -->",`http://${ip}:${cfg.general.portGwApp}/ping`);
                             console.log("PING: invio -->",upaddrsToSend);
                             let request_data = {
-                                url: `http://${ip}:3800/ping`,
+                                url: `http://${ip}:${cfg.general.portGwApp}/ping`,
                                 method: 'POST',
                                 body: {
                                     params: {

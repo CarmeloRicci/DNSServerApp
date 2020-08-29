@@ -30,8 +30,8 @@ require('./shared/watcher_leases');
 // watcherService.watcher_file_leases();
 
 
-app.listen(3880, () => {
-  console.log('Application listening on port 3880!');
+app.listen(3900, () => {
+  console.log('Application listening on port 3900!');
 });
 
 module.exports = app;

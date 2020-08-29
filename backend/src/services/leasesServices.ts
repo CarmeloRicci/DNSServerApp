@@ -28,7 +28,7 @@ export default class LeasesServices {
 
     async SendPostToDb(data:any) {
         let request_data = {
-            url: `http://${cfg.general.ipBackend}:3900/leases/refresh`,
+            url: `http://${cfg.general.ipBackend}:${cfg.general.portBackend}/leases/refresh`,
             method: 'POST',
             body: {
                 params: {
@@ -39,6 +39,6 @@ export default class LeasesServices {
             json: true
         };
         await Utilities.request(request_data);
-        console.log("DnsService - SendPostResponse: Post send! " + `(http://${cfg.general.ipBackend}:3900/leases/refresh)`)
+        console.log("DnsService - SendPostResponse: Post send! " + `(http://${cfg.general.ipBackend}:${cfg.general.portBackend}/leases/refresh)`)
     }
 }
