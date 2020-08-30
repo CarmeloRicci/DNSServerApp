@@ -4,6 +4,10 @@ const equal = require('deep-equal');
 const fs = require('fs');
 import { Utilities } from '../shared/utilities';
 import _ = require('lodash');
+const os = require('os');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+const delay = require('delay');
 var hostile = require('hostile')
 import { IHostDevice, ILeases } from "../interfaces/interfaces";
 
@@ -20,12 +24,12 @@ export default class DnsService {
     let leases_file: ILeases[] = await leasesService.leasesServices(false)
 
     for (let i = 0; i < leases_file.length; i++) {
-      console.log("1 --> " + leases_file[i].mac , " 2 --> " +  data.Mac)
+      console.log("1 --> " + leases_file[i].mac, " 2 --> " + data.Mac)
       if (leases_file[i].mac == data.Mac) {
         devices = { ip: leases_file[i].ip, mac: data.Mac, host: data.HostName }
       }
       else {
-        console.log ("Mac non trovato nel file leases")
+        console.log("Mac non trovato nel file leases")
         return 0;
       }
     }
@@ -106,6 +110,18 @@ export default class DnsService {
         console.log('set /etc/hosts successfully!')
       }
     })
+
+
+
+    //const { stdout, stderr } = await exec(` sudo /bin/bash -c 'ps axf | grep dnsmasq - 2.8 | grep - v grep | awk '{print $1}' '`);
+    const { stdout, stderr } = await exec(` sudo /bin/bash -c '  export TEST=$(echo $(ps axf | grep dnsmasq-2.8 | grep -v grep | awk '{print $1}'))  '`);
+    console.log('RESOLV: stdout:', stdout);
+    console.log('RESOLV: stderr:', stderr);
+    const temp = await delay(1000);
+    const { stdout1, stderr2 } = await exec(` sudo /bin/bash -c '  kill -SIGHUP $TEST  '`);
+    console.log('RESOLV: stdout:', stdout1);
+    console.log('RESOLV: stderr:', stderr2);
+    
   }
 
 }
