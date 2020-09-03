@@ -36,9 +36,7 @@ export default class DnsService {
 
       try {
         const tempfilehost: any = await this.GetHostsFile()
-
         await this.FindIpInToHostsFile(tempfilehost, devices)
-
       } catch (error) {
         console.log("Error HostServices", error);
       }
@@ -96,7 +94,7 @@ export default class DnsService {
     for (let i = 0; i < hostsfile.length; i++) {
       //console.log(i + " -> " + hostsfile[i])
       if (device.ip == hostsfile[i].ip) {
-        console.log("ççç ",device, hostsfile[i].host)
+        console.log("ççç ",device.ip, hostsfile[i].host)
         await this.UpdateRecordHostsFile(device, hostsfile[i].host)
       }
     }
@@ -116,7 +114,7 @@ export default class DnsService {
         console.log('set /etc/hosts successfully!')
       }
     })
-    await this.InsertRecordHostsFile(device)
+    //await this.InsertRecordHostsFile(device)
   }
 
   async InsertRecordHostsFile(device: IHostDevice) {
