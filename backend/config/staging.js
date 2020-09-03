@@ -16,8 +16,9 @@ module.exports = {
   general: {
     ipDnsServer: "10.10.0.1",
     tenant_id: process.env.TENANTID,
-    //tenant_id: "Agri01",
-    ipBackend: "172.19.0.4",
+    //tenant_id: "Agri01", 
+    ipBackend: process.env.IPBackend,
+    //ipBackend: "172.19.0.4",
     portBackend: "4000",
     portGwApp: "3800"
   }
