@@ -19,6 +19,7 @@ export default class DnsService {
   async NewRulesForHostFile(data: any) {
 
     let devices: IHostDevice
+    let flag1: boolean = false;
 
 
     let leases_file: ILeases[] = await leasesService.leasesServices(false)
@@ -27,23 +28,27 @@ export default class DnsService {
       console.log("1 --> " + leases_file[i].mac, " 2 --> " + data.Mac)
       if (leases_file[i].mac === data.Mac) {
         devices = { ip: leases_file[i].ip, mac: data.Mac, host: data.HostName }
-      }
-      else {
-        console.log("Mac non trovato nel file leases")
-        return 0;
+        flag1 = true;
       }
     }
 
-    try {
-      const tempfilehost: any = await this.GetHostsFile()
+    if (flag1) {
 
-      await this.FindIpInToHostsFile(tempfilehost, devices)
+      try {
+        const tempfilehost: any = await this.GetHostsFile()
 
-    } catch (error) {
-      console.log("Error HostServices", error);
+        await this.FindIpInToHostsFile(tempfilehost, devices)
+
+      } catch (error) {
+        console.log("Error HostServices", error);
+      }
+    }
+
+    else {
+      console.log("Mac non trovato nel file leases")
+      return 0;
     }
   }
-
   async GetHostsFile() {
     try {
       const promise: any = new Promise((resolve, reject) => {
@@ -125,7 +130,7 @@ export default class DnsService {
     // const { stdout1, stderr1 } = await exec(` /bin/bash -c "kill -SIGHUP $TEST" `);
     // console.log('RESOLV: stdout:', stdout1);
     // console.log('RESOLV: stderr:', stderr1);
-    
+
   }
 
 }
