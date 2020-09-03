@@ -115,7 +115,7 @@ export default class DnsService {
 
     // const { stdout, stderr } = await exec(` sudo /bin/bash -c 'ps axf | grep dnsmasq - 2.8 | grep - v grep | awk '{print $1}' '`);
     // const { stdout, stderr } = await exec(` /bin/bash -c 'export TEST=$(echo $(ps axf | grep dnsmasq-2.8 | grep -v grep | awk '{print $1}'))'`);
-    const { stdout, stderr } = await exec(` /bin/bash -c "export TEST=$(echo $(ps axf | grep dnsmasq-2.8 | grep -v grep | awk '{print $1}'))" `);
+    const { stdout, stderr } = await exec(` /bin/bash -c "TEST=$(echo $(ps axf | grep dnsmasq-2.8 | grep -v grep | awk '{print $1}'))" `);
     console.log('RESOLV: stdout:', stdout);
     console.log('RESOLV: stderr:', stderr);
     const temp = await delay(1000);
