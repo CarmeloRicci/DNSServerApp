@@ -96,7 +96,7 @@ export default class DnsService {
     for (let i = 0; i < hostsfile.length; i++) {
       //console.log(i + " -> " + hostsfile[i])
       if (device.ip == hostsfile[i].ip) {
-        console.log(device, hostsfile[i].host)
+        console.log("ççç ",device, hostsfile[i].host)
         await this.UpdateRecordHostsFile(device, hostsfile[i].host)
       }
     }
