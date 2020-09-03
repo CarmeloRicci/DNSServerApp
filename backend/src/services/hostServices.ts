@@ -75,21 +75,33 @@ export default class DnsService {
     }
   }
 
+  // async FindIpInToHostsFile(hostsfile: any, device: IHostDevice) {
+
+  //   let flag: boolean = false
+  //   for (let i = 0; i < hostsfile.length; i++) {
+  //     //console.log(i + " -> " + hostsfile[i])
+  //     if (device.ip == hostsfile[i].ip) {
+  //       flag = true;
+  //       if (device.host != hostsfile[i].host) {
+  //         await this.UpdateRecordHostsFile(device, hostsfile[i].host)
+  //       }
+  //     }
+  //   }
+  //   if (flag == false) await this.InsertRecordHostsFile(device)
+  // }
+
   async FindIpInToHostsFile(hostsfile: any, device: IHostDevice) {
 
     let flag: boolean = false
     for (let i = 0; i < hostsfile.length; i++) {
       //console.log(i + " -> " + hostsfile[i])
       if (device.ip == hostsfile[i].ip) {
-        flag = true;
-        if (device.host != hostsfile[i].host) {
-          await this.UpdateRecordHostsFile(device, hostsfile[i].host)
-        }
+        console.log(device, hostsfile[i].host)
+        await this.UpdateRecordHostsFile(device, hostsfile[i].host)
       }
     }
-    if (flag == false) await this.InsertRecordHostsFile(device)
+    await this.InsertRecordHostsFile(device)
   }
-
 
   async RawDataToArrayDevices(raw: any) {
     let temp: IHostDevice[] = raw
