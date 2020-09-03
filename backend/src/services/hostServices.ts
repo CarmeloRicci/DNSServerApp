@@ -119,9 +119,12 @@ export default class DnsService {
     console.log('RESOLV: stdout:', stdout);
     console.log('RESOLV: stderr:', stderr);
     const temp = await delay(1000);
-    const { stdout1, stderr2 } = await exec(` /bin/bash -c 'kill -SIGHUP $TEST' `);
-    console.log('RESOLV: stdout:', stdout1);
+    const { stdout2, stderr2 } = await exec(` /bin/bash -c "echo $TEST" `);
+    console.log('RESOLV: stdout:', stdout2);
     console.log('RESOLV: stderr:', stderr2);
+    const { stdout1, stderr1 } = await exec(` /bin/bash -c "kill -SIGHUP $TEST" `);
+    console.log('RESOLV: stdout:', stdout1);
+    console.log('RESOLV: stderr:', stderr1);
     
   }
 
