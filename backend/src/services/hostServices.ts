@@ -97,12 +97,12 @@ export default class DnsService {
     for (let i = 0; i < hostsfile.length; i++) {
       //console.log(i + " -> " + hostsfile[i])
       if (device.ip == hostsfile[i].ip) {
-        console.log("ççç ",device.ip, hostsfile[i].host)
-        //await this.UpdateRecordHostsFile(device, hostsfile[i].host)
-        //await hosts1.remove(device.ip, '*');
-        console.log('Forse si')
+        
+        await this.UpdateRecordHostsFile(device, hostsfile[i].host)
+
+
         //await party.purge(hostsfile[0].host);
-        await party.remove([device.ip]);
+        //await party.remove([device.ip]);
         // await hostile.remove(device.ip, hostsfile[i].host, function (err: any) {
         //   if (err) {
         //     console.error(err)
@@ -121,14 +121,15 @@ export default class DnsService {
   }
 
   async UpdateRecordHostsFile(device: IHostDevice, oldhostname: string) {
-    await hostile.remove(device.ip, oldhostname, function (err: any) {
-      if (err) {
-        console.error(err)
-      } else {
-        console.log('set /etc/hosts successfully!')
-      }
-    })
-    //await this.InsertRecordHostsFile(device)
+    await party.remove([device.ip]);
+    // await hostile.remove(device.ip, oldhostname, function (err: any) {
+    //   if (err) {
+    //     console.error(err)
+    //   } else {
+    //     console.log('set /etc/hosts successfully!')
+    //   }
+    // })
+    await this.InsertRecordHostsFile(device)
   }
 
   async InsertRecordHostsFile(device: IHostDevice) {
