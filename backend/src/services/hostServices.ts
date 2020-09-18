@@ -101,7 +101,8 @@ export default class DnsService {
         //await this.UpdateRecordHostsFile(device, hostsfile[i].host)
         //await hosts1.remove(device.ip, '*');
         console.log('Forse si')
-        await party.purge(hostsfile[0].host);
+        //await party.purge(hostsfile[0].host);
+        await party.remove([device.ip]);
         // await hostile.remove(device.ip, hostsfile[i].host, function (err: any) {
         //   if (err) {
         //     console.error(err)
