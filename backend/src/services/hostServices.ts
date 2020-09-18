@@ -100,7 +100,7 @@ export default class DnsService {
           if (err) {
             console.error(err)
           } else {
-            console.log('set /etc/hosts successfully!')
+            console.log('set /etc/hosts successfully! 1')
           }
         })
       }
