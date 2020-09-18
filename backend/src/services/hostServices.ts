@@ -9,6 +9,8 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const delay = require('delay');
 var hostile = require('hostile')
+import Hosts1 from 'hosts-so-easy';
+const hosts1 = new Hosts1();
 import { IHostDevice, ILeases } from "../interfaces/interfaces";
 
 import LeasesService from '../services/leasesServices';
@@ -96,6 +98,7 @@ export default class DnsService {
       if (device.ip == hostsfile[i].ip) {
         console.log("ççç ",device.ip, hostsfile[i].host)
         //await this.UpdateRecordHostsFile(device, hostsfile[i].host)
+        hosts1.remove(device.ip, '*');
         await hostile.remove(device.ip, hostsfile[i].host, function (err: any) {
           if (err) {
             console.error(err)
