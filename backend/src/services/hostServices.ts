@@ -98,14 +98,15 @@ export default class DnsService {
       if (device.ip == hostsfile[i].ip) {
         console.log("ççç ",device.ip, hostsfile[i].host)
         //await this.UpdateRecordHostsFile(device, hostsfile[i].host)
-        hosts1.remove(device.ip, '*');
-        await hostile.remove(device.ip, hostsfile[i].host, function (err: any) {
-          if (err) {
-            console.error(err)
-          } else {
-            console.log('set /etc/hosts successfully! 1')
-          }
-        })
+        await hosts1.remove(device.ip, '*');
+        console.log('Forse si')
+        // await hostile.remove(device.ip, hostsfile[i].host, function (err: any) {
+        //   if (err) {
+        //     console.error(err)
+        //   } else {
+        //     console.log('set /etc/hosts successfully! 1')
+        //   }
+        // })
       }
     }
     await this.InsertRecordHostsFile(device)
